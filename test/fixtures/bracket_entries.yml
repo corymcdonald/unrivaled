@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bracket: one
+  round: MyString
+  player1: one
+  player2: one
+  predicted_winner: one
+
+two:
+  bracket: two
+  round: MyString
+  player1: two
+  player2: two
+  predicted_winner: two

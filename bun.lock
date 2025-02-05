@@ -1,0 +1,29 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "app",
+      "dependencies": {
+        "@hotwired/stimulus": "^3.2.2",
+        "@hotwired/turbo-rails": "^8.0.12",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+      },
+    },
+  },
+  "packages": {
+    "@hotwired/stimulus": ["@hotwired/stimulus@3.2.2", "", {}, "sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A=="],
+
+    "@hotwired/turbo": ["@hotwired/turbo@8.0.12", "", {}, "sha512-l3BiQRkD7qrnQv6ms6sqPLczvwbQpXt5iAVwjDvX0iumrz6yEonQkNAzNjeDX25/OJMFDTxpHjkJZHGpM9ikWw=="],
+
+    "@hotwired/turbo-rails": ["@hotwired/turbo-rails@8.0.12", "", { "dependencies": { "@hotwired/turbo": "^8.0.12", "@rails/actioncable": "^7.0" } }, "sha512-ZXwu9ez+Gd4RQNeHIitqOQgi/LyqY8J4JqsUN0nnYiZDBRq7IreeFdMbz29VdJpIsmYqwooE4cFzPU7QvJkQkA=="],
+
+    "@rails/actioncable": ["@rails/actioncable@7.2.201", "", {}, "sha512-wsTdWoZ5EfG5k3t7ORdyQF0ZmDEgN4aVPCanHAiNEwCROqibSZMXXmCbH7IDJUVri4FOeAVwwbPINI7HVHPKBw=="],
+
+    "react": ["react@19.0.0", "", {}, "sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ=="],
+
+    "react-dom": ["react-dom@19.0.0", "", { "dependencies": { "scheduler": "^0.25.0" }, "peerDependencies": { "react": "^19.0.0" } }, "sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ=="],
+
+    "scheduler": ["scheduler@0.25.0", "", {}, "sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA=="],
+  }
+}
