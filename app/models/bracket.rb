@@ -40,7 +40,7 @@ class Bracket < ApplicationRecord
       )
     end
 
-    # only one can progress, let's generate all empty entries for the Second Round, Quatrer Final, Semi Final, and Finals
+    # only one can progress, let's generate all empty entries for the Second Round, Quatrer Final, Semi Finals, and Finals
 
     puts "SOUND ONNNN"
     bracket_entries.first_round.each_slice(2) do |entries|
@@ -59,7 +59,7 @@ class Bracket < ApplicationRecord
 
     bracket_entries.second_round.each_slice(2) do |entries|
       bracket_entries << BracketEntry.new(
-        round: "Quarter Final",
+        round: "Quarter Finals",
         player1: nil,
         player2: nil,
         previous_entry1_id: entries.first.id,
@@ -69,7 +69,7 @@ class Bracket < ApplicationRecord
 
     bracket_entries.quarter_final.each_slice(2) do |entries|
       bracket_entries << BracketEntry.new(
-        round: "Semi Final",
+        round: "Semi Finals",
         player1: nil,
         player2: nil,
         previous_entry1_id: entries.first.id,

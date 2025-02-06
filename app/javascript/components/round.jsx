@@ -7,7 +7,7 @@ const Round = ({ name, entries, selectWinner, side }) => {
     const half = Math.ceil(roundEntries.length / 2);
     roundEntries = side === 'right' ?  roundEntries.slice(half) : roundEntries.slice(0, half) ;
     let className = `${side}-bracket`;
-    if(['Final', 'Semi Final'].indexOf(name) > -1) {
+    if(['Final', 'Semi Finals'].indexOf(name) > -1) {
         className = 'final-bracket';
     }
 

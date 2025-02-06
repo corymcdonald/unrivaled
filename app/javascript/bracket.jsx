@@ -149,12 +149,14 @@ const HelloWorld = () => {
                 </button>
             </div>
             <div className="flex mb-5 justify-between items-center">
+                {readOnly ? null :
                 <button
                     className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
                     onClick={() => share()}
                 >
                     🔗 Share
                 </button>
+        }
                 <button
                     className={`px-6 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'all' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
                     onClick={() => setView('all')}
@@ -182,11 +184,11 @@ const HelloWorld = () => {
                 }
                 {(view == 'finals' || view == 'all') &&
                     <React.Fragment>
-                        <Round name="Quarter Final" entries={bracket.entries} selectWinner={selectWinner} side="left" />
-                        <Round name="Semi Final" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Final" entries={bracket.entries} selectWinner={selectWinner} side="left" />
-                        <Round name="Semi Final" entries={bracket.entries} selectWinner={selectWinner} side="right" />
-                        <Round name="Quarter Final" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                        <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
                     </React.Fragment>
                 }
                 {(view == 'right' || view == 'all') &&

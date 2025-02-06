@@ -6,9 +6,9 @@ class BracketEntry < ApplicationRecord
 
   scope :first_round, -> { where(round: "First Round") }
   scope :second_round, -> { where(round: "Second Round") }
-  # Quarter Final, Semi Final, and Finals
-  scope :quarter_final, -> { where(round: "Quarter Final") }
-  scope :semi_final, -> { where(round: "Semi Final") }
+  # Quarter Finals, Semi Finals, and Finals
+  scope :quarter_final, -> { where(round: "Quarter Finals") }
+  scope :semi_final, -> { where(round: "Semi Finals") }
   scope :final, -> { where(round: "Final") }
   scope :winner, -> { where(round: "Winner") }
 
