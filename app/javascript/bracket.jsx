@@ -9,6 +9,7 @@ const HelloWorld = () => {
     // create a useeffect to fetch data from the current url + .json
     const [bracket, setBracket] = React.useState({ entries: [] });
     const [players, setPlayers] = React.useState([]);
+    const [saving, setSaving] = React.useState(false);
     const [view, setView] = React.useState(
         window.innerWidth > 1024 ? 'all' : 'left'
     );
@@ -45,6 +46,7 @@ const HelloWorld = () => {
         if (readOnly) {
             return;
         }
+        setSaving(true);
         axios.patch(window.location.href, { bracket: { bracket_entries: bracket.entries } }, {
             headers: {
                 "Content-Type": "application/json",
@@ -52,6 +54,7 @@ const HelloWorld = () => {
             }
         })
             .then((response) => {
+                setSaving(false);
             });
 
 
@@ -168,7 +171,8 @@ const HelloWorld = () => {
                         className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
                         onClick={() => save()}
                     >
-                        💾 Save
+                        { saving && "Saving..." } 
+                        {!saving && "💾 Save" }
                     </button>
                 }
             </div>
