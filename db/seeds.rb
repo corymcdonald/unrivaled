@@ -12,7 +12,7 @@ Player.create(name: 'Breanna Stewart', team: 'Mist', team_link: '/mist', externa
 Player.create(name: 'Napheesa Collier', team: 'Lunar Owls', team_link: '/lunar-owls', external_link: '/player/napheesa-collier-bcggk95vccg5')
 Player.create(name: 'Chelsea Gray', team: 'Rose', team_link: '/rose', external_link: '/player/chelsea-gray-r6go6kmzp23j')
 Player.create(name: 'Arike Ogunbowale', team: 'Vinyl', team_link: '/vinyl', external_link: '/player/arike-ogunbowale-r9p1g69osavq')
-Player.create(name: 'Jewell Loyd', team: 'Lunar Owls', team_link: '/lunar-owls', external_link: '/player/jewell-loyd-a9clu4l00da0')
+Player.create(name: 'Jewell Loyd', team: 'Mist', team_link: '/mist', external_link: '/player/jewell-loyd-a9clu4l00da0')
 Player.create(name: 'Rhyne Howard', team: 'Laces', team_link: '/laces', external_link: '/player/rhyne-howard-4oadwt7gp636')
 Player.create(name: 'Kahleah Copper', team: 'Mist', team_link: '/mist', external_link: '/player/kahleah-copper-2k18gfn8wsmb')
 Player.create(name: 'Jackie Young', team: 'Phantom', team_link: '/phantom', external_link: '/player/jackie-young-cbba3mtca702')
@@ -44,3 +44,4 @@ Player.create(name: 'Jordin Canada', team: 'Phantom', team_link: '/phantom', ext
 Player.create(name: 'Cameron Brink', team: 'Lunar Owls', team_link: '/lunar-owls', external_link: '/player/cameron-brink-9z9kphgbukqm')
 Player.create(name: 'Katie Lou Samuelson', team: 'Rose', team_link: '/rose', external_link: '/player/katie-lou-samuelson-v6zp627hqzx9')
 Player.create(name: 'Sabrina Ionescu', team: 'Laces', team_link: '/laces', external_link: '/player/sabrina-ionescu-m4x8h3sdj1ki')
+Player.create(name: 'BYE', team: '', team_link: '', external_link: '')

@@ -4,8 +4,8 @@ class CreateBracketEntries < ActiveRecord::Migration[8.0]
       t.bigint :bracket_id, null: false
       t.string :round
 
-      t.integer :player1_id, null: false
-      t.integer :player2_id, null: false
+      t.integer :player1_id
+      t.integer :player2_id
       t.integer :predicted_winner_id
       t.integer :actual_winner_id
 

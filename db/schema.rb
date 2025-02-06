@@ -17,8 +17,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_194956) do
   create_table "bracket_entries", force: :cascade do |t|
     t.bigint "bracket_id", null: false
     t.string "round"
-    t.integer "player1_id", null: false
-    t.integer "player2_id", null: false
+    t.integer "player1_id"
+    t.integer "player2_id"
     t.integer "predicted_winner_id"
     t.integer "actual_winner_id"
     t.integer "previous_entry1_id"

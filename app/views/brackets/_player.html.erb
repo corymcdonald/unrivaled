@@ -1,0 +1,26 @@
+
+<div class="matchup flex justify-between items-center m-1">
+    <% if player.present?  %>
+
+    <div class="flex items-center"> 
+        <% if player.bye? %>
+            <div class="player-card"></div>
+        <% else %>
+            <%= image_tag("players_transparent/#{player.id}.png", class: "player-card") %>
+        <%end %>
+        <span class="p-1 text-sm text-left syncopate">
+            <span class="font-light"><%= player.first_name %></span>
+            <div class="font-black  "><%= player.last_name %></div>
+        </span>
+     </div>
+     <span>
+        <span class="text-xs rank px-1 py-1 mr-1">#1</span>
+     </span>
+
+    <%else %>
+        <div class="flex items-center">
+            <div class="player-card"></div>
+            <span class="font-black p-1 syncopate text-sm"></span>
+        </div>
+    <%end%>
+</div>

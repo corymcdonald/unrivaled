@@ -1,6 +1,13 @@
 class BracketEntry < ApplicationRecord
   belongs_to :bracket
-  belongs_to :player1
-  belongs_to :player2
-  belongs_to :predicted_winner
+  belongs_to :player1, class_name: "Player", optional: true
+  belongs_to :player2, class_name: "Player", optional: true
+  belongs_to :predicted_winner, class_name: "Player", optional: true
+
+  scope :first_round, -> { where(round: "First Round") }
+  scope :second_round, -> { where(round: "Second Round") }
+  # Quarter Final, Semi Final, and Finals
+  scope :quarter_final, -> { where(round: "Quarter Final") }
+  scope :semi_final, -> { where(round: "Semi Final") }
+  scope :final, -> { where(round: "Final") }
 end
