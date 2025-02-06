@@ -1,0 +1,96 @@
+<div id="root"></div>
+
+
+<div class="tournament-container">
+  <h1 class="tournament-title syncopate">Unrivaled 1-on-1 Tournament</h1>
+  <div class="bracket">
+    <section aria-labelledby="round-1">
+      <h2 id="round-2" class="round-title">Round 1</h2>
+      <ol>
+        <% @bracket.bracket_entries.first_round[0..7].each do |entry| %>
+          <li>
+            <div>
+               <%= entry.id %>
+
+              <%= render partial: 'player', locals: { player: entry.player1, id: entry.previous_entry1_id } %>
+              <%= render partial: 'player', locals: { player: entry.player2, id: entry.previous_entry2_id } %>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </section>
+
+    <section aria-labelledby="round-2">
+      <h2 id="round-2" class="round-title">Round 2</h2>
+      
+      <ol >
+        <% @bracket.bracket_entries.second_round[0..3].each do |entry| %>
+          <li id="<%= @bracket.id%>">
+            <div>
+              <%= render partial: 'player', locals: { player: entry.player1, id: entry.previous_entry1_id } %>
+              <%= render partial: 'player', locals: { player: entry.player2, id: entry.previous_entry2_id } %>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </section>
+
+    <section aria-labelledby="quarter-finals">
+      <h2 id="round-2" class="round-title">Quarter Finals</h2>
+      <ol >
+        <% @bracket.bracket_entries.quarter_final[0..1].each do |entry| %>
+          <li>
+            <div>
+              <%= render partial: 'player', locals: { player: entry.player1, id: entry.previous_entry1_id } %>
+              <%= render partial: 'player', locals: { player: entry.player2, id: entry.previous_entry2_id } %>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </section>
+
+    <section aria-labelledby="semi-finals">
+      <h2 id="round-2" class="round-title">Semi Finals</h2>
+      <ol >
+        <% entry = @bracket.bracket_entries.semi_final[0] %>
+        <li>
+          <div>
+<%= render partial: 'player', locals: { player: entry.player1, id: entry.previous_entry1_id } %>
+              <%= render partial: 'player', locals: { player: entry.player2, id: entry.previous_entry2_id } %>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+
+    <section aria-labelledby="round-2">
+      <h2 id="round-2" class="round-title">Round 2</h2>
+      <ol >
+        <% @bracket.bracket_entries.second_round[4..].each do |entry| %>
+          <li id="<%= @bracket.id%>">
+            <div>
+<%= render partial: 'player', locals: { player: entry.player1, id: entry.previous_entry1_id } %>
+              <%= render partial: 'player', locals: { player: entry.player2, id: entry.previous_entry2_id } %>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </section>
+
+
+    <section aria-labelledby="round-1">
+      <h2 class="round-title">Round 1</h2>
+      <ol>
+        <% @bracket.bracket_entries.first_round[8..-1].each do |entry| %>
+          <li>
+            <div>
+<%= render partial: 'player', locals: { player: entry.player1, id: entry.previous_entry1_id } %>
+              <%= render partial: 'player', locals: { player: entry.player2, id: entry.previous_entry2_id } %>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </section>
+    
+  </div>
+</div>

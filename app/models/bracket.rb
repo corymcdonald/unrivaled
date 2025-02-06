@@ -4,7 +4,7 @@ class Bracket < ApplicationRecord
   after_initialize :initial_entries
 
   def initial_entries
-    bracket_entries.destroy_all
+    # bracket_entries.destroy_all
     return if bracket_entries.present?
 
     first_round_entries = [
@@ -82,6 +82,17 @@ class Bracket < ApplicationRecord
         previous_entry2_id: entries.second&.id
       )
     end
+
+    bracket_entries.final.each_slice(2) do |entries|
+      bracket_entries << BracketEntry.new(
+        round: "Winner",
+        player1: nil,
+        player2: nil,
+        previous_entry1_id: entries.first.id,
+        previous_entry2_id: entries.second&.id
+      )
+    end
+
 
     bracket_entries
   end

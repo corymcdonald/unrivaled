@@ -10,4 +10,9 @@ class BracketEntry < ApplicationRecord
   scope :quarter_final, -> { where(round: "Quarter Final") }
   scope :semi_final, -> { where(round: "Semi Final") }
   scope :final, -> { where(round: "Final") }
+  scope :winner, -> { where(round: "Winner") }
+
+  def parent_bracket
+    BracketEntry.where(previous_entry1_id: id).or(BracketEntry.where(previous_entry2_id: id)).first
+  end
 end
