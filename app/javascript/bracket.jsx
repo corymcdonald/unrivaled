@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Round from './components/round';
 import Player from './components/player';
+import CSRFToken from './components/cookie';
+import { createRoot } from 'react-dom/client';
 
 const HelloWorld = () => {
     // create a useeffect to fetch data from the current url + .json
@@ -10,14 +12,16 @@ const HelloWorld = () => {
     const [view, setView] = React.useState(
         window.innerWidth > 1024 ? 'all' : 'left'
     );
+    const [readOnly, setReadOnly] = React.useState(true);
 
-    const ONE_MINUTE = 1;
+    const ONE_MINUTE = 60000;
     const [timestamp, setTimestamp] = React.useState(Date.now());
 
     React.useEffect(() => {
         axios.get(window.location.href + '.json')
             .then((response) => {
                 setBracket(response.data);
+                setReadOnly(response.data.read_only)
 
                 let convertedPlayers = response.data.players.reduce((acc, player) => {
                     acc[player.id] = player;
@@ -29,29 +33,42 @@ const HelloWorld = () => {
     }, []);
 
     const share = () => {
+        if (readOnly) {
+            return;
+        }
         // save();
         navigator.clipboard.writeText(window.location.href)
         alert("Copied!")
     }
 
     const save = () => {
-        console.log('saving..')
-        axios.patch(window.location.href, { bracket: bracket })
+        if (readOnly) {
+            return;
+        }
+        axios.patch(window.location.href, { bracket: { bracket_entries: bracket.entries } }, {
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": CSRFToken(document.cookie)
+            }
+        })
             .then((response) => {
-                console.log(response);
             });
 
 
     }
 
     const selectWinner = (entryId, player) => {
+        if (readOnly) {
+            return;
+        }
         if (!player || player.last_name === 'BYE') {
             return;
         }
 
-        let entryToUpdate = bracket.entries.find((entry) => entry.id === entryId);
 
         let updatedBracket = { ...bracket };
+        let entryToUpdate = updatedBracket.entries.find((entry) => entry.id === entryId);
+        entryToUpdate.predicted_winner = player;
 
         let parentEntry = updatedBracket.entries.find((entry) => entry.id == entryToUpdate.parent_bracket_id);
         let oldPlayer1 = null;
@@ -66,51 +83,36 @@ const HelloWorld = () => {
             oldPlayer2 = parentEntry.player2;
             parentEntry.player2 = player;
         }
-        console.log({ oldPlayer1, oldPlayer2 })
-
 
         // clear out any entries that aren't in the first round that had the oldPlayer1 or oldPlayer2
         updatedBracket.entries.forEach((entry) => {
             if (entry.round == 'First Round') {
-                console.log('returning early')
 
                 return;
             }
             if (entry.id <= entryId) {
-                console.log('returning early')
                 return;
             }
 
 
             if (oldPlayer2 && entry.player2 == oldPlayer2) {
-                console.log('Found oldPlayer2 in a later round as player2')
-                console.log(entry)
                 entry.player2 = null;
             }
             if (oldPlayer2 && entry.player1 == oldPlayer2) {
-                console.log('Found oldPlayer2 in a later round as player1')
-                console.log(entry)
                 entry.player1 = null;
             }
 
             if (oldPlayer1 && entry.player2 == oldPlayer1) {
-                console.log('Found oldPlayer1 in a later round as player2')
-                console.log(entry)
                 entry.player2 = null;
             }
 
             if (oldPlayer1 && entry.player1 == oldPlayer1) {
-                console.log('Found oldPlayer1 in a later round as player1')
-                console.log(entry)
                 entry.player1 = null
             }
 
         })
 
         setBracket(updatedBracket);
-
-        console.log(updatedBracket.entries)
-        console.log(parentEntry)
 
         const now = Date.now();
         if (timestamp && now - timestamp >= ONE_MINUTE) {
@@ -159,12 +161,14 @@ const HelloWorld = () => {
                 >
                     Entire Bracket
                 </button>
-                <button
-                    className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
-                    onClick={() => save()}
-                >
-                    💾 Save
-                </button>
+                {readOnly ? null :
+                    <button
+                        className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
+                        onClick={() => save()}
+                    >
+                        💾 Save
+                    </button>
+                }
             </div>
 
 
@@ -193,25 +197,24 @@ const HelloWorld = () => {
                 }
 
 
-             
+
             </div>
             {winner && (view == 'finals' || view == 'all') &&
-                    <div className="w-screen flex justify-center ">
+                <div className="w-screen flex justify-center ">
                     <div className='w-md  '>
                         <h2 className="text-5xl font-black syncopate">
                             WINNER
                         </h2>
                         <Player player={winner.player1} id={winner.previous_entry1_id} isWinner={true} />
                     </div>
-                    </div>
+                </div>
 
-                }
+            }
 
         </div>
     );
 };
-console.log('hi')
 
-import { createRoot } from 'react-dom/client';
+
 const root = createRoot(document.getElementById('root'));
 root.render(<HelloWorld />);

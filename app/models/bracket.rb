@@ -1,11 +1,13 @@
 class Bracket < ApplicationRecord
   has_many :bracket_entries
 
-  after_initialize :initial_entries
+  validates :user_identifier, presence: true
+
+  # after_initialize :initial_entries
 
   def initial_entries
     # bracket_entries.destroy_all
-    return if bracket_entries.present?
+    # return if bracket_entries.present?
 
     first_round_entries = [
       [ Player.find_by(name: "Jewell Loyd"), Player.bye ],
@@ -26,6 +28,7 @@ class Bracket < ApplicationRecord
       [ Player.find_by(name: "Kayla McBride"), Player.find_by(name: "DiJonai Carrington") ]
     ]
 
+
     first_round_entries.each do |entry|
       winner = entry[0] if entry[1].bye?
 
@@ -39,6 +42,7 @@ class Bracket < ApplicationRecord
 
     # only one can progress, let's generate all empty entries for the Second Round, Quatrer Final, Semi Final, and Finals
 
+    puts "SOUND ONNNN"
     bracket_entries.first_round.each_slice(2) do |entries|
       entry = entries.first
 

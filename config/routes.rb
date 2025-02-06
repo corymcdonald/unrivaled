@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root "brackets#index"
 
-  resources :brackets, only: [ :index, :show, :update ]
+  resources :brackets, only: [ :index, :new, :show, :update ]
 
   # API routes
   namespace :api do
