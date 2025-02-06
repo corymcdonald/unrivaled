@@ -5,4 +5,6 @@ if player.present?
   unless player.bye?
     json.image image_url("players_transparent/#{player.id}.png")
   end
+  json.rank player.rank
+
 end
