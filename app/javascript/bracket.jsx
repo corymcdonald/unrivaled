@@ -35,12 +35,7 @@ const HelloWorld = () => {
                 setBracket(response.data);
                 setReadOnly(response.data.read_only)
 
-                let convertedPlayers = response.data.players.reduce((acc, player) => {
-                    acc[player.id] = player;
-                    return acc;
-                }, {});
-
-                setPlayers(convertedPlayers);
+                console.log(response.data)
             });
     }, []);
 
@@ -142,6 +137,11 @@ const HelloWorld = () => {
     return (
         <div className={`flex flex-col ${view == 'all' ? 'max-lg:min-w-725' : ''}`} >
             <h1 className="tournament-title syncopate">Unrivaled<br /> 1-on-1 Tournament</h1>
+            <a className="px-6 py-2 mb-3 w-1/2 text-gray-700 border border-gray-300  text-white rounded-lg shadow-sm hover:bg-gray-100 transition self-center"
+               href="/" 
+            >
+                Create New Bracket
+            </a>
             <div className="flex mb-5 justify-between items-center">
                 <ViewButton view={view} setView={setView} name='left'>Second Round</ViewButton>
                 <ViewButton view={view} setView={setView} name='left-second'>Quarter Round</ViewButton>
@@ -269,6 +269,9 @@ const HelloWorld = () => {
     );
 };
 
-
-const root = createRoot(document.getElementById('root'));
-root.render(<HelloWorld />);
+console.log('Mounting React');
+// on document load, render the HelloWorld component to the root element
+document.addEventListener('DOMContentLoaded', () => {
+    const root = createRoot(document.getElementById('root'));
+    root.render(<HelloWorld />);
+})
