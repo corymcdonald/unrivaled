@@ -48,7 +48,7 @@ const HelloWorld = () => {
         if (readOnly) {
             return;
         }
-        // save();
+        save();
         navigator.clipboard.writeText(window.location.href)
         alert("Copied!")
     }
