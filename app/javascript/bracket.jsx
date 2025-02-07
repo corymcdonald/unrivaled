@@ -157,7 +157,7 @@ const HelloWorld = () => {
                 >
                     Right Finals
                 </button>
-                
+
                 <button
                     className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'right' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
                     onClick={() => setView('right')}
@@ -167,13 +167,13 @@ const HelloWorld = () => {
             </div>
             <div className="flex mb-5 justify-between items-center">
                 {readOnly ? null :
-                <button
-                    className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
-                    onClick={() => share()}
-                >
-                    🔗 Share
-                </button>
-        }
+                    <button
+                        className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
+                        onClick={() => share()}
+                    >
+                        🔗 Share
+                    </button>
+                }
                 <button
                     className={`px-6 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'all' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
                     onClick={() => setView('all')}
@@ -185,8 +185,8 @@ const HelloWorld = () => {
                         className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
                         onClick={() => save()}
                     >
-                        { saving && "Saving..." } 
-                        {!saving && "💾 Save" }
+                        {saving && "Saving..."}
+                        {!saving && "💾 Save"}
                     </button>
                 }
             </div>
@@ -194,7 +194,7 @@ const HelloWorld = () => {
 
 
             <div className="bracket">
-                {(view == 'left' ) &&
+                {(view == 'left') &&
                     <React.Fragment>
                         <Round name="First Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
@@ -202,10 +202,10 @@ const HelloWorld = () => {
                 }
 
                 {(view == 'left-finals') &&
-                <React.Fragment>
-                    <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
-                    <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
-                </React.Fragment>
+                    <React.Fragment>
+                        <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                    </React.Fragment>
                 }
 
                 {(view == 'finals') &&
@@ -229,6 +229,18 @@ const HelloWorld = () => {
                     </React.Fragment>
                 }
 
+                {(view == 'all') &&
+                    <React.Fragment>
+                        <Round name="First Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Final" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                        <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                        <Round name="First Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                    </React.Fragment>
+                }
 
 
             </div>
