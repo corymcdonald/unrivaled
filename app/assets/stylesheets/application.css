@@ -46,16 +46,12 @@ body {
   display: flex;
   margin-bottom: 100px;
   width: 100%;
-  justify-content: center;
-  overflow-x: auto; 
+  justify-content: space-between;
 }
 
 
 
 @media (max-width: 600px) {
-  .bracket {
-    justify-content: flex-start !important; /* Align items to the start on small screens */
-  }
 
   li {
     margin: 5px 0; /* Adjust margin */
@@ -63,8 +59,7 @@ body {
 }
 
   section {
-    max-width: 300px;
-    min-width: 200px;
+    max-width: 200px;
     padding: 0 20px 0 10px;
     width: 17%;
   }

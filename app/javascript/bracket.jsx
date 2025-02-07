@@ -140,7 +140,7 @@ const HelloWorld = () => {
 
 
     return (
-        <div className='flex flex-col' >
+        <div className={`flex flex-col ${view == 'all' ? 'max-lg:min-w-725' : ''}`} >
             <h1 className="tournament-title syncopate">Unrivaled<br /> 1-on-1 Tournament</h1>
             <div className="flex mb-5 justify-between items-center">
                 <ViewButton view={view} setView={setView} name='left'>Second Round</ViewButton>
@@ -254,7 +254,7 @@ const HelloWorld = () => {
 
             </div>
             {winner && (view == 'finals' || view == 'all') &&
-                <div className="w-screen flex justify-center ">
+                <div className={`w-screen flex justify-center  ${view == 'all' ? 'max-lg:min-w-725' : ''}`}>
                     <div className='w-md  '>
                         <h2 className="text-5xl font-black syncopate">
                             WINNER

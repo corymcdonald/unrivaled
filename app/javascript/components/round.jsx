@@ -12,9 +12,9 @@ const Round = ({ name, entries, selectWinner, side }) => {
     }
 
     return (
-        <section aria-labelledby={name} className={className}>
+        <section aria-labelledby={name} className={`${className} max-md:min-w-50 `}>
             <h2 className="round-title matchup p-1 uppercase italic">{name}</h2>
-            <ol className="min-w-45">
+            <ol className="">
                 {roundEntries.map((entry) => (
                     <Entry key={entry.id} entry={entry} selectWinner={selectWinner}  />
                 ))
