@@ -133,22 +133,36 @@ const HelloWorld = () => {
             <h1 className="tournament-title syncopate">Unrivaled<br /> 1-on-1 Tournament</h1>
             <div className="flex mb-5 justify-between items-center">
                 <button
-                    className={`px-6 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'left' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
+                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'left' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
                     onClick={() => setView('left')}
                 >
-                    Left Side
+                    Left
                 </button>
                 <button
-                    className={`px-6 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'finals' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
+                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'left-finals' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
+                    onClick={() => setView('left-finals')}
+                >
+                    Left Finals
+                </button>
+
+                <button
+                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'finals' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
                     onClick={() => setView('finals')}
                 >
                     Finals
                 </button>
                 <button
-                    className={`px-6 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'right' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
+                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'right-finals' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
+                    onClick={() => setView('right-finals')}
+                >
+                    Right Finals
+                </button>
+                
+                <button
+                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'right' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
                     onClick={() => setView('right')}
                 >
-                    Right Side
+                    Right
                 </button>
             </div>
             <div className="flex mb-5 justify-between items-center">
@@ -180,22 +194,35 @@ const HelloWorld = () => {
 
 
             <div className="bracket">
-                {(view == 'left' || view == 'all') &&
+                {(view == 'left' ) &&
                     <React.Fragment>
                         <Round name="First Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                     </React.Fragment>
                 }
-                {(view == 'finals' || view == 'all') &&
+
+                {(view == 'left-finals') &&
+                <React.Fragment>
+                    <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                    <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                </React.Fragment>
+                }
+
+                {(view == 'finals') &&
                     <React.Fragment>
-                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Final" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
-                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
                     </React.Fragment>
                 }
-                {(view == 'right' || view == 'all') &&
+
+                {(view == 'right-finals') &&
+                    <React.Fragment>
+                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                        <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                    </React.Fragment>
+                }
+                {(view == 'right') &&
                     <React.Fragment>
                         <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />
                         <Round name="First Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />
