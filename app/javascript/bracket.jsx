@@ -245,6 +245,7 @@ const HelloWorld = () => {
                         <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Final" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
                         <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />
                         <Round name="First Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />
                     </React.Fragment>
