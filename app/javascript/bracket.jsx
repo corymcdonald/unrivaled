@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { Children } from 'react';
 import axios from 'axios';
 import Round from './components/round';
 import Player from './components/player';
 import CSRFToken from './components/cookie';
 import { createRoot } from 'react-dom/client';
+
+const ViewButton = ({ view, setView, name, children }) => {
+    return (
+        <button
+            className={`w-1/8 h-14 text-xs text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view ===name ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
+            onClick={() => setView(name)}
+        >
+            {children}
+        </button>
+    )
+}
 
 const HelloWorld = () => {
     // create a useeffect to fetch data from the current url + .json
@@ -132,38 +143,18 @@ const HelloWorld = () => {
         <div className='flex flex-col' >
             <h1 className="tournament-title syncopate">Unrivaled<br /> 1-on-1 Tournament</h1>
             <div className="flex mb-5 justify-between items-center">
-                <button
-                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'left' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
-                    onClick={() => setView('left')}
-                >
-                    Left
-                </button>
-                <button
-                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'left-finals' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
-                    onClick={() => setView('left-finals')}
-                >
-                    Left Finals
-                </button>
+                <ViewButton view={view} setView={setView} name='left'>Second Round</ViewButton>
+                <ViewButton view={view} setView={setView} name='left-second'>Quarter Round</ViewButton>
+                <ViewButton view={view} setView={setView} name='left-quarter'>Semi Finals</ViewButton>
 
-                <button
-                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'finals' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
-                    onClick={() => setView('finals')}
-                >
-                    Finals
-                </button>
-                <button
-                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'right-finals' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
-                    onClick={() => setView('right-finals')}
-                >
-                    Right Finals
-                </button>
+                <ViewButton view={view} setView={setView} name='finals'>Finals</ViewButton>
 
-                <button
-                    className={`w-1/6 h-16 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'right' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
-                    onClick={() => setView('right')}
-                >
-                    Right
-                </button>
+                <ViewButton view={view} setView={setView} name='right-quarter'>Semi Finals</ViewButton>
+                <ViewButton view={view} setView={setView} name='right-second'>Quarter Finals</ViewButton>
+                <ViewButton view={view} setView={setView} name='right'>Second Round</ViewButton>
+
+
+
             </div>
             <div className="flex mb-5 justify-between items-center">
                 {readOnly ? null :
@@ -201,12 +192,20 @@ const HelloWorld = () => {
                     </React.Fragment>
                 }
 
-                {(view == 'left-finals') &&
+                {(view == 'left-second') &&
                     <React.Fragment>
                         <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                         <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
                     </React.Fragment>
                 }
+
+                {(view == 'left-quarter') &&
+                    <React.Fragment>
+                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                        <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="left" />
+                    </React.Fragment>
+                }
+
 
                 {(view == 'finals') &&
                     <React.Fragment>
@@ -216,12 +215,21 @@ const HelloWorld = () => {
                     </React.Fragment>
                 }
 
-                {(view == 'right-finals') &&
+
+                {(view == 'right-quarter') &&
+                    <React.Fragment>
+                        <Round name="Semi Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                        <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
+                    </React.Fragment>
+                }
+
+                {(view == 'right-second') &&
                     <React.Fragment>
                         <Round name="Quarter Finals" entries={bracket.entries} selectWinner={selectWinner} side="right" />
                         <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />
                     </React.Fragment>
                 }
+
                 {(view == 'right') &&
                     <React.Fragment>
                         <Round name="Second Round" entries={bracket.entries} selectWinner={selectWinner} side="right" />

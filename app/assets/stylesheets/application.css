@@ -41,20 +41,33 @@ body {
   margin-bottom: 30px;
 }
 
+
 .bracket {
   display: flex;
   margin-bottom: 100px;
-  overflow: visible;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
+  overflow-x: auto; 
 }
 
-section {
-  max-width: 300px;
-  min-width: 200px;
-  padding: 0 20px 0 10px;
-  width: 17%;
+
+
+@media (max-width: 600px) {
+  .bracket {
+    justify-content: flex-start !important; /* Align items to the start on small screens */
+  }
+
+  li {
+    margin: 5px 0; /* Adjust margin */
+  }
 }
+
+  section {
+    max-width: 300px;
+    min-width: 200px;
+    padding: 0 20px 0 10px;
+    width: 17%;
+  }
 
 
 
