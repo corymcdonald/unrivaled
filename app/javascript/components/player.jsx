@@ -35,7 +35,7 @@ const Player = ({ id, player, onClick, isWinner }) => {
         </div>
       )}
       <span>
-       {player && player.is_out && <span class="opacity-100 syncopate font-bold"> OUT</span>}
+       {player && player.is_out && <span className="opacity-100 syncopate font-bold"> OUT</span>}
 
         {player && player.last_name != 'BYE' && 
          <span className={`${textSize} rank px-1 py-1 mr-1`}>{`${player?.rank ? player.rank :''}`}</span>

@@ -40,7 +40,10 @@ class Bracket < ApplicationRecord
         winner = player2
       end
 
-      puts "player1: #{player1.name} player2: #{player2.name} winner: #{winner&.name}"
+      if player1.is_out? && player2.is_out?
+        winner = nil
+      end
+
 
       bracket_entries << BracketEntry.new(
         round: "First Round",
@@ -57,6 +60,16 @@ class Bracket < ApplicationRecord
 
       player1 = Player.find(first_bracket.actual_winner_id) if first_bracket.actual_winner_id.present?
       player2 = Player.find(second_bracket.actual_winner_id) if second_bracket.actual_winner_id.present?
+
+      # if both of the players are out from either the first_bracket or the second_bracket, then move the first and second players from the bracket forward in the matchup
+      if first_bracket.player1.is_out? && first_bracket.player2.is_out?
+        player1 = second_bracket.player1
+        player2 = second_bracket.player2
+      elsif second_bracket.player1.is_out? && second_bracket.player2.is_out?
+        player1 = first_bracket.player1
+        player2 = first_bracket.player2
+      end
+
 
       bracket_entries << BracketEntry.new(
         round: "Second Round",
