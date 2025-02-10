@@ -24,6 +24,13 @@ body {
   background-position: top;
   background-attachment: fixed;
 }
+#root {
+  background: url('/background.png'), linear-gradient(to bottom, #621383, #2f023b);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
+}
 
 .syncopate {
   font-family: "Archivo", sans-serif;

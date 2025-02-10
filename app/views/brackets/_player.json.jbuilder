@@ -6,5 +6,5 @@ if player.present?
     json.image image_url("players_transparent/#{player.id}.png")
   end
   json.rank player.rank
-
+  json.is_out player.is_out
 end

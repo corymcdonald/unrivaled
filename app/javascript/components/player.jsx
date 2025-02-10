@@ -6,13 +6,18 @@ const Player = ({ id, player, onClick, isWinner }) => {
   if (isWinner) {
     textSize = 'text-lg'; 
     playerCard = 'player-card-winner';
-    
+  }
+
+  const selectPlayer = () => {
+    if (player && !player.is_out &&  player.last_name != 'BYE') {
+      onClick();
+    }
   }
 
   return (
-    <div key={id} id={id} className="matchup flex justify-between items-center m-1"  onClick={onClick}>
+    <div key={id} id={id} className={`matchup flex justify-between items-center m-1 `}  onClick={selectPlayer}>
       {player ? (
-        <div className="flex items-center">
+        <div className={`flex items-center ${player && player.is_out ? 'opacity-50' : ''}`}>
           {player.last_name == 'BYE' ? (
             <div className={playerCard}></div>
           ) : (
@@ -30,6 +35,8 @@ const Player = ({ id, player, onClick, isWinner }) => {
         </div>
       )}
       <span>
+       {player && player.is_out && <span class="opacity-100 syncopate font-bold"> OUT</span>}
+
         {player && player.last_name != 'BYE' && 
          <span className={`${textSize} rank px-1 py-1 mr-1`}>{`${player?.rank ? player.rank :''}`}</span>
       }

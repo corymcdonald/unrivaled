@@ -4,11 +4,13 @@ import Round from './components/round';
 import Player from './components/player';
 import CSRFToken from './components/cookie';
 import { createRoot } from 'react-dom/client';
+import { domToPng } from 'modern-screenshot'
+
 
 const ViewButton = ({ view, setView, name, children }) => {
     return (
         <button
-            className={`w-1/8 h-14 text-xs text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view ===name ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
+            className={`w-1/8 h-14 text-xs text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === name ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
             onClick={() => setView(name)}
         >
             {children}
@@ -24,6 +26,10 @@ const HelloWorld = () => {
     const [view, setView] = React.useState(
         window.innerWidth > 1024 ? 'all' : 'left'
     );
+    const [saveImageRunning, setSaveImageRunning] = React.useState(false);
+
+    const [showToolbar, setShowToolbar] = React.useState(true);
+
     const [readOnly, setReadOnly] = React.useState(true);
 
     const ONE_MINUTE = 60000;
@@ -38,6 +44,26 @@ const HelloWorld = () => {
                 console.log(response.data)
             });
     }, []);
+    
+    React.useEffect(() => {
+        if(saveImageRunning) {
+            console.log('saving image')
+            
+            setSaveImageRunning(false)
+            setShowToolbar(false)
+
+            console.log('domToPNg')
+            console.log(document.querySelector('#root'))
+            domToPng(document.querySelector('#root')).then(dataUrl => {
+                console.log('yep')
+                console.log(dataUrl)
+                const link = document.createElement('a')
+                link.download = 'Unrivaled Bracket.png'
+                link.href = dataUrl
+                link.click()
+            })
+        }
+    }, [saveImageRunning]);
 
     const share = () => {
         if (readOnly) {
@@ -65,6 +91,13 @@ const HelloWorld = () => {
 
 
     }
+
+    const saveImage = () => {
+        setView('all')
+        setShowToolbar(false)
+        setSaveImageRunning(true)
+    }
+
 
     const selectWinner = (entryId, player) => {
         if (readOnly) {
@@ -137,53 +170,59 @@ const HelloWorld = () => {
     return (
         <div className={`flex flex-col ${view == 'all' ? 'max-lg:min-w-725' : ''}`} >
             <h1 className="tournament-title syncopate">Unrivaled<br /> 1-on-1 Tournament</h1>
-            <a className="px-6 py-2 mb-3 w-1/2 text-gray-700 border border-gray-300  text-white rounded-lg shadow-sm hover:bg-gray-100 transition self-center"
-               href="/" 
-            >
-                Create New Bracket
-            </a>
-            <div className="flex mb-5 justify-between items-center">
-                <ViewButton view={view} setView={setView} name='left'>Second Round</ViewButton>
-                <ViewButton view={view} setView={setView} name='left-second'>Quarter Round</ViewButton>
-                <ViewButton view={view} setView={setView} name='left-quarter'>Semi Finals</ViewButton>
-
-                <ViewButton view={view} setView={setView} name='finals'>Finals</ViewButton>
-
-                <ViewButton view={view} setView={setView} name='right-quarter'>Semi Finals</ViewButton>
-                <ViewButton view={view} setView={setView} name='right-second'>Quarter Finals</ViewButton>
-                <ViewButton view={view} setView={setView} name='right'>Second Round</ViewButton>
-
-
-
-            </div>
-            <div className="flex mb-5 justify-between items-center">
-                {readOnly ? null :
-                    <button
-                        className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
-                        onClick={() => share()}
-                    >
-                        🔗 Share
-                    </button>
-                }
-                <button
-                    className={`px-6 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'all' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
-                    onClick={() => setView('all')}
+            {showToolbar && <div className="toolbar flex flex-col">
+                <a className="px-6 py-2 mb-3 w-1/2 text-gray-700 border border-gray-300  text-white rounded-lg shadow-sm hover:bg-gray-100 transition self-center"
+                    href="/"
                 >
-                    Entire Bracket
-                </button>
-                {readOnly ? null :
+                    Create New Bracket
+                </a>
+                <div className="flex mb-5 justify-between items-center">
+                    <ViewButton view={view} setView={setView} name='left'>Second Round</ViewButton>
+                    <ViewButton view={view} setView={setView} name='left-second'>Quarter Round</ViewButton>
+                    <ViewButton view={view} setView={setView} name='left-quarter'>Semi Finals</ViewButton>
+
+                    <ViewButton view={view} setView={setView} name='finals'>Finals</ViewButton>
+
+                    <ViewButton view={view} setView={setView} name='right-quarter'>Semi Finals</ViewButton>
+                    <ViewButton view={view} setView={setView} name='right-second'>Quarter Finals</ViewButton>
+                    <ViewButton view={view} setView={setView} name='right'>Second Round</ViewButton>
+                </div>
+                <div className="flex mb-5 justify-between items-center">
+                    {readOnly ? null :
+                        <button
+                            className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
+                            onClick={() => share()}
+                        >
+                            🔗 Share
+                        </button>
+                    }
+                    {readOnly ? null :
+                        <button
+                            className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
+                            onClick={() => saveImage()}
+                        >
+                            📸 Save Image
+                        </button>
+                    }
                     <button
-                        className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
-                        onClick={() => save()}
+                        className={`px-6 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'all' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
+                        onClick={() => setView('all')}
                     >
-                        {saving && "Saving..."}
-                        {!saving && "💾 Save"}
+                        Entire Bracket
                     </button>
-                }
+                    {readOnly ? null :
+                        <button
+                            className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
+                            onClick={() => save()}
+                        >
+                            {saving && "Saving..."}
+                            {!saving && "💾 Save"}
+                        </button>
+                    }
+                </div>
             </div>
 
-
-
+            }
             <div className="bracket">
                 {(view == 'left') &&
                     <React.Fragment>

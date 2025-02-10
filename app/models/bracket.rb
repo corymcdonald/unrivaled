@@ -29,29 +29,39 @@ class Bracket < ApplicationRecord
     ]
 
 
+
     first_round_entries.each do |entry|
-      winner = entry[0] if entry[1].bye?
+      player1 = entry[0]
+      player2 = entry[1]
+
+      if player2.bye? || player2.is_out?
+        winner = player1
+      elsif player1.bye? || player1.is_out?
+        winner = player2
+      end
+
+      puts "player1: #{player1.name} player2: #{player2.name} winner: #{winner&.name}"
 
       bracket_entries << BracketEntry.new(
         round: "First Round",
-        player1: entry[0],
-        player2: entry[1],
+        player1: player1,
+        player2: player2,
         actual_winner_id: winner&.id
       )
     end
 
     # only one can progress, let's generate all empty entries for the Second Round, Quatrer Final, Semi Finals, and Finals
-
-    puts "SOUND ONNNN"
     bracket_entries.first_round.each_slice(2) do |entries|
-      entry = entries.first
+      first_bracket = entries.first
+      second_bracket = entries.second
 
-      player1 = Player.find(entry.actual_winner_id) if entry.actual_winner_id.present?
+      player1 = Player.find(first_bracket.actual_winner_id) if first_bracket.actual_winner_id.present?
+      player2 = Player.find(second_bracket.actual_winner_id) if second_bracket.actual_winner_id.present?
 
       bracket_entries << BracketEntry.new(
         round: "Second Round",
         player1: player1,
-        player2: nil,
+        player2: player2,
         previous_entry1_id: entries.first.id,
         previous_entry2_id: entries.second&.id
       )

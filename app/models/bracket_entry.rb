@@ -15,4 +15,12 @@ class BracketEntry < ApplicationRecord
   def parent_bracket
     BracketEntry.where(previous_entry1_id: id).or(BracketEntry.where(previous_entry2_id: id)).first
   end
+
+  def self.top_predicted_winners
+    BracketEntry.winner.where.not(player1_id: nil)
+          .group(:player1_id, "players.name")
+          .joins(:player1)
+          .select("player1_id, players.name, COUNT(bracket_entries.id) AS entries_count")
+          .order("entries_count DESC")
+  end
 end
