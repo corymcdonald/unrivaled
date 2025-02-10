@@ -34,7 +34,7 @@ class BracketsController < ApplicationController
       )
     end
 
-    render :show
+    render json: { success: true }
   end
 
   private
