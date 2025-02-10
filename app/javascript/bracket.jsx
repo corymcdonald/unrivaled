@@ -196,14 +196,14 @@ const HelloWorld = () => {
                             🔗 Share
                         </button>
                     }
-                    {readOnly ? null :
+                    {/* {readOnly ? null :
                         <button
-                            className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition"
+                            className="px-6 py-2 text-gray-700 border border-gray-300 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition "
                             onClick={() => saveImage()}
                         >
-                            📸 Save Image
+                            📸 Screenshot
                         </button>
-                    }
+                    } */}
                     <button
                         className={`px-6 py-2 text-gray-700 border border-gray-300 rounded-lg shadow-sm transition ${view === 'all' ? 'bg-purple-950 text-white' : 'bg-white hover:bg-gray-100'}`}
                         onClick={() => setView('all')}
