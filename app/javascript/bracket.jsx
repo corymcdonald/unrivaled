@@ -32,7 +32,7 @@ const HelloWorld = () => {
 
     const [readOnly, setReadOnly] = React.useState(true);
 
-    const ONE_MINUTE = 1000;
+    const ONE_MINUTE = 3000;
     const [timestamp, setTimestamp] = React.useState(Date.now());
 
     React.useEffect(() => {
