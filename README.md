@@ -1,24 +1,12 @@
-# README
+# Unrivaled Bracket application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A caveat is that this is a quick, hacky project that was developed within 24 hours. Some of the coding style, of approaches were not ideal.
 
-Things you may want to cover:
+## Key things I have done
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Created a recursive bracket entry model using Rails as a backend
+- Designed the [primary bracket user interface](app/javascript/bracket.jsx) in React.
+- Created a [quick reporting](app/models/bracket_entry.rb) method to determine the top predicted winners of the entire championship.
+- Defined a [Player model](app/models/player.rb) with database-based eligibily to allow for players who dropped out the day before the challenge started
+- Marketed the bracket entry on Social Media (BlueSky) and had over 5000 brackets created by users. 
+- Leveraged photoshop to create transparent player images based on the Unrivaled site 
